@@ -2,6 +2,8 @@ package com.task2.lms.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table (name="author")
 public class Author {
@@ -15,6 +17,10 @@ public class Author {
 
     @Column(name = "author_bio", length = 45)
     private String bio;
+
+    //1 Author has many book relation create
+    @OneToMany(mappedBy = "author")
+    private Set<Book> books;
 
     public Author(int authorid, String name, String bio) {
         this.authorid = authorid;
