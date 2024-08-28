@@ -42,4 +42,8 @@ public class BorrowController {
         String borrowername = borrowService.deleteBorrow(id);
         return "deleted";
     }
+    @GetMapping("/currently-borrowed")
+    public List<Borrower> getCurrentlyBorrowedBooks() {
+        return borrowService.getCurrentlyBorrowedBooks();
+    }
 }

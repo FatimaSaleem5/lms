@@ -25,6 +25,7 @@ public class Borrower {
    @JoinColumn(name = "returnDate")
    private LocalDate returnDate;
 
+   private boolean isReturned;
 
 // ####### Generate Constructors #########
 
@@ -95,6 +96,15 @@ public class Borrower {
     public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
+
+    public boolean isReturned() {
+        return isReturned;
+    }
+
+    public void setReturned(boolean returned) {
+        isReturned = returned;
+    }
+    //
 
     @Override
     public String toString() {

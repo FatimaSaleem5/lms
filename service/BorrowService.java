@@ -15,4 +15,6 @@ public interface BorrowService {
     String updateBorrow(BorrowerUpdateDTO borrowerUpdateDTO);
 
     String deleteBorrow(int id);
+
+    List<Borrower> getCurrentlyBorrowedBooks();
 }

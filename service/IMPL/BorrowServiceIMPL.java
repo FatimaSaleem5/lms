@@ -52,11 +52,12 @@ public class BorrowServiceIMPL implements BorrowService {
         if (borrowRepo.existsById(borrowerUpdateDTO.getBorrow_id()))
         {
             Borrower borrower = borrowRepo.getById(borrowerUpdateDTO.getBorrow_id());
+            borrower.setEmail(borrowerUpdateDTO.getEmail());
+            borrower.setName(borrowerUpdateDTO.getName());
             borrower.setBook(bookRepo.getById(borrowerUpdateDTO.getBook_id()));
             borrower.setBorrowDate(borrowerUpdateDTO.getBorrowDate());
             borrower.setReturnDate(borrowerUpdateDTO.getReturnDate());
-            borrower.setEmail(borrowerUpdateDTO.getEmail());
-            borrower.setName(borrowerUpdateDTO.getName());
+
             borrowRepo.save(borrower);
             return "Borrower Succesfully Updated";
 
@@ -80,5 +81,10 @@ public class BorrowServiceIMPL implements BorrowService {
         }
     }
 
+    @Override
+    public List<Borrower> getCurrentlyBorrowedBooks() {
+        List<Borrower> getCurrentBorrower = borrowRepo.findByIsReturnedFalse();
+        return getCurrentBorrower;
+    }
 
 }

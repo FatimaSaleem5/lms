@@ -49,8 +49,11 @@ public class BookServiceIMPL implements BookService{
         if (bookRepo.existsById(bookUpdateDTO.getBookid()))
         {
             Book book = bookRepo.getById(bookUpdateDTO.getBookid());
+            book.setTitle(bookUpdateDTO.getTitle());
+            book.setPublisheddate(bookUpdateDTO.getPublisheddate());
+            book.setIsbn(bookUpdateDTO.getIsbn());
             book.setAuthor(authorRepo.getById(bookUpdateDTO.getAuthor_id()));
-           bookRepo.save(book);
+            bookRepo.save(book);
             return book.getTitle();
         }
 
