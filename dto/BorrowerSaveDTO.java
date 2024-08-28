@@ -1,6 +1,5 @@
 package com.task2.lms.dto;
 
-import com.task2.lms.entity.Book;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +11,7 @@ import java.time.LocalDate;
 @Data
 public class BorrowerSaveDTO {
 
+    private boolean isReturned;
     private String email;
     private String name;
     private int book_id;

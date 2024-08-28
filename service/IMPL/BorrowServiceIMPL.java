@@ -34,7 +34,8 @@ public class BorrowServiceIMPL implements BorrowService {
                 borrowerSaveDTO.getName(),
                 bookRepo.getById(borrowerSaveDTO.getBook_id()),
                 borrowerSaveDTO.getBorrowDate(),
-                borrowerSaveDTO.getReturnDate()
+                borrowerSaveDTO.getReturnDate(),
+                borrowerSaveDTO.isReturned()
         );
         borrowRepo.save(borrower);
         return borrower.getEmail();
@@ -57,6 +58,7 @@ public class BorrowServiceIMPL implements BorrowService {
             borrower.setBook(bookRepo.getById(borrowerUpdateDTO.getBook_id()));
             borrower.setBorrowDate(borrowerUpdateDTO.getBorrowDate());
             borrower.setReturnDate(borrowerUpdateDTO.getReturnDate());
+            borrower.isReturned(borrowerUpdateDTO.isReturned());
 
             borrowRepo.save(borrower);
             return "Borrower Succesfully Updated";

@@ -15,5 +15,5 @@ public class BorrowerUpdateDTO {
     private int book_id;
     private LocalDate borrowDate;
     private LocalDate returnDate;
-
+    private boolean isReturned;
 }

@@ -2,18 +2,17 @@ package com.task2.lms.entity;
 
 import jakarta.persistence.*;
 
-import java.security.PrivateKey;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @Table(name="borrow")
-
 public class Borrower {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private String email;
+
     private String name;
 
    @ManyToOne
@@ -25,25 +24,28 @@ public class Borrower {
    @JoinColumn(name = "returnDate")
    private LocalDate returnDate;
 
+   @JoinColumn(name = "is_returned")
    private boolean isReturned;
 
 // ####### Generate Constructors #########
 
-    public Borrower(int id, String email, String name, Book book, LocalDate borrowDate, LocalDate returnDate) {
+    public Borrower(int id, String email, String name, Book book, LocalDate borrowDate, LocalDate returnDate, boolean isReturned) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.book = book;
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
+        this.isReturned = isReturned;
     }
 
-    public Borrower(String email, String name, Book book, LocalDate borrowDate, LocalDate returnDate) {
+    public Borrower(String email, String name, Book book, LocalDate borrowDate, LocalDate returnDate , boolean isReturned) {
         this.email = email;
         this.name = name;
         this.book = book;
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
+        this.isReturned = isReturned;
     }
 
     public Borrower() {
@@ -96,14 +98,16 @@ public class Borrower {
     public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
+//
 
-    public boolean isReturned() {
+    public boolean isReturned(boolean returned) {
         return isReturned;
     }
 
     public void setReturned(boolean returned) {
         isReturned = returned;
     }
+
     //
 
     @Override
