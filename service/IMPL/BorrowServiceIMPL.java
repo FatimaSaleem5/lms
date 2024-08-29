@@ -62,9 +62,7 @@ public class BorrowServiceIMPL implements BorrowService {
 
             borrowRepo.save(borrower);
             return "Borrower Succesfully Updated";
-
         }
-
         else{
             return "Borrower ID not exist";
         }
@@ -87,6 +85,18 @@ public class BorrowServiceIMPL implements BorrowService {
     public List<Borrower> getCurrentlyBorrowedBooks() {
         List<Borrower> getCurrentBorrower = borrowRepo.findByIsReturnedFalse();
         return getCurrentBorrower;
+    }
+
+    @Override
+    public String getBorrowerById(int id) {
+        if(borrowRepo.existsById(id))
+        {
+            borrowRepo.getById(id);
+            return "Borrower ID found";
+        }
+        else {
+            return "Borrower ID not found";
+        }
     }
 
 }

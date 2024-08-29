@@ -7,11 +7,14 @@ import com.task2.lms.dto.BorrowerSaveDTO;
 import com.task2.lms.dto.BorrowerUpdateDTO;
 import com.task2.lms.entity.Book;
 import com.task2.lms.entity.Borrower;
+import com.task2.lms.repo.BorrowRepo;
 import com.task2.lms.service.BookService;
 import com.task2.lms.service.BorrowService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
 import java.util.List;
 
 @RestController
@@ -19,6 +22,8 @@ import java.util.List;
 public class BorrowController {
     @Autowired
     private BorrowService borrowService;
+    @Autowired
+    private BorrowRepo borrowRepo;
 
     @PostMapping(path ="/save")
     public String saveBorrow (@RequestBody BorrowerSaveDTO borrowerSaveDTO){
@@ -42,8 +47,16 @@ public class BorrowController {
         String borrowername = borrowService.deleteBorrow(id);
         return "deleted";
     }
+
     @GetMapping("/currently-borrowed")
     public List<Borrower> getCurrentlyBorrowedBooks() {
         return borrowService.getCurrentlyBorrowedBooks();
     }
+
+    @GetMapping( path = "/borrowers/{id}")
+    public ResponseEntity<Borrower> getBorrowerById(@PathVariable (value = "id") int id)
+    {
+        return borrowRepo.findById(id).map(ResponseEntity::ok).orElseGet(()-> ResponseEntity.notFound().build());
+    }
+//
 }
